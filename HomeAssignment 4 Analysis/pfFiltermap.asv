@@ -112,7 +112,7 @@ function [X_k, W_k] = pfFilterStep(X_kmin1, W_kmin1, yk, proc_f, proc_Q, meas_h,
 for i =1:N
      Q = (mvnrnd(zeros(n,1),proc_Q))';
      X_k(:,i)=proc_f(X_kmin1(:,i))+Q;
-     W_k(:,i)=W_kmin1(:,i)*mvnpdf(yk,meas_h(X_k(:,i)),meas_R);
+     W_k(:,i)=W_kmin1(:,i)*mvnpdf(yk-meas_h(X_k(:,i)),0,meas_R);
 end
 
 W_k=W_k/sum(W_k);

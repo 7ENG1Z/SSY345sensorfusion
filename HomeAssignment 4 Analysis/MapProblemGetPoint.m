@@ -30,4 +30,6 @@ plot([X+Y*i],'-*')
 
 Xk = [X';Y'];
 
-save('Xk.mat','Xk');
+save Xk
+
+% save('Xk.mat','Xk');

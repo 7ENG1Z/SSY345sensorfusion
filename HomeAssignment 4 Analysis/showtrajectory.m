@@ -32,7 +32,7 @@ if bp==1
     n = length(X_est);
     Pblue=[];
     Pred=[];
-    for k= 1:10:n
+    for k= 1:n
         m = length(X_p(:,:,k));
         for j=1:m
             if W_p(j,k)==0
@@ -42,8 +42,8 @@ if bp==1
             end
         end
     end
-    scatter(Pblue(1,:),Pblue(2,:),5,'blue')
-    scatter(Pred(1,:),Pred(2,:),5,'red')
+    scatter(Pblue(1,:),Pblue(2,:),'blue')
+    scatter(Pred(1,:),Pred(2,:),'red')
 end
 
 end
