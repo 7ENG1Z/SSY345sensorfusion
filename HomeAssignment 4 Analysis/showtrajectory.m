@@ -1,4 +1,4 @@
-function showtrajectory(X_true)
+function showtrajectory(X_true,X_est,X_p,W_p,bp)
 %X_est,X_p,W_p,bp
 %X_true     true trajectory
 %X_est      estimated trajectory
@@ -26,24 +26,24 @@ axis([0.8 11.2 0.8 9.2])
 title('A map of the village','FontSize',20)
 
 plot([X_true(1,:)+X_true(2,:)*1i],'-*')
-% plot([X_est(1,:)+X_est(2,:)*1i],'-*','Color','cyan',lineWidth=1)
-% 
-% if bp==1
-%     n = length(X_est);
-%     Pblue=[];
-%     Pred=[];
-%     for k= 1:5:n
-%         m = length(X_p(:,:,k));
-%         for j=1:m
-%             if W_p(j,k)==0
-%                 Pblue=[Pblue X_p(:,j,k)];
-%             else
-%                 Pred=[Pred X_p(:,j,k)];
-%             end
-%         end
-%     end
-%     scatter(Pblue(1,:),Pblue(2,:),5,'blue','filled')
-%     scatter(Pred(1,:),Pred(2,:),5,'red','filled')
-% end
-% 
+plot([X_est(1,:)+X_est(2,:)*1i],'-*','Color','cyan',lineWidth=1)
+
+if bp==1
+    n = length(X_est);
+    Pblue=[];
+    Pred=[];
+    for k= 1:5:n
+        m = length(X_p(:,:,k));
+        for j=1:m
+            if W_p(j,k)==0
+                Pblue=[Pblue X_p(:,j,k)];
+            else
+                Pred=[Pred X_p(:,j,k)];
+            end
+        end
+    end
+    scatter(Pblue(1,:),Pblue(2,:),5,'blue','filled')
+    scatter(Pred(1,:),Pred(2,:),5,'red','filled')
+end
+
 end
