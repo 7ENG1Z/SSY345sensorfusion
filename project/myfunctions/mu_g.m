@@ -1,12 +1,13 @@
-function [x,P] = mu_g(x,P,yacc,Ra,g0)
+function [x,P] = mu_g(x,P,yacc,Ra,g0 )
             
             %calculate Hx and hx
             [a, b ,c ,d]= dQqdq(x);
-            Hx=[a ,b, c, d];
-            hx=g0*Qq(x)';
+            Hx=[a'*g0 ,b'*g0, c'*g0, d'*g0];
+            hx=Qq(x)'*g0;
+
             %implement EKF update
-            S=(g0^2)*Hx*P*Hx'+Ra;
-            k=g0*P*Hx'*inv(S);
+            S=Hx*P*Hx'+Ra;
+            k=P*Hx'/S;
                        
             x=x+k*(yacc-hx);
             P=P-k*S*k';
