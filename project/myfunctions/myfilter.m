@@ -27,14 +27,14 @@ function [xhat, meas] = myfilter()
   t0 = [];  % Initial time (initialize on first data received)
   nx = 4;   % Assuming that you use q as state variable.
   % Add your filter settings here.
-  Rm =diag([0.0885,0.1117,0.1085]) ;
-  m0 =[0;sqrt((4.0669)^2+(-6.8125)^2);(-43.2251)];
-  g0=[-0.1124,-0.0614,9.8704]';
-  Ra=1.0e-03*diag([0.1894,0.1394,0.2128]);
-  Rw=diag([1.0e-04*0.0024,1.0e-04 *0.0028,1.0e-04 *0.1949]);
+  Rm =diag([0.0843,0.1062,0.0974]) ;
+  m0 =[0;sqrt((1.8617)^2+(-10.8390)^2);(-47.9589)];
+  g0=[-0.1642,-0.0622,9.8720]';
+  Ra=1.0e-05*diag([5.0364,4.9247,4.6910]);
+  Rw=diag([1.8082e-07,1.5847e-07,2.0807e-07]);
  
 %   alpha=0.98;
-  L=[];
+  L=49.2037;
   
   
   % Current filter state.
@@ -110,17 +110,18 @@ function [xhat, meas] = myfilter()
 
       mag = data(1, 8:10)';
       if ~any(isnan(mag))  % Mag measurements are available.
-        if isempty(L)  % Initialize t0
-        L= norm(mag);
-        end
+%         if isempty(L)  % Initialize t0
+%         L= norm(mag);
+%         end
         L=0.98*L+0.02*norm(mag);
-        if (L < 1.5*norm(mag) &&L > 0.5*norm(mag))
+        if (L < 55 &&L > 45)
         % Do something
-        [x,P] = mu_m(x,P,mag,m0,Rm);
-        [x, P] = mu_normalizeQ(x, P); 
-        ownView.setMagDist(0)
+            [x,P] = mu_m(x,P,mag,m0,Rm);
+            [x, P] = mu_normalizeQ(x, P); 
+            ownView.setMagDist(0)
+        else
+            ownView.setMagDist(1)
         end
-        ownView.setMagDist(1)
       end
 
       orientation = data(1, 18:21)';  % Google's orientation estimate.
