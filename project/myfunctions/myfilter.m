@@ -1,4 +1,4 @@
-function [xhat, meas] = filterTASK5()
+function [xhat, meas] = myfilter()
 % FILTERTEMPLATE  Filter template
 %
 % This is a template function for how to collect and filter data
@@ -28,8 +28,8 @@ function [xhat, meas] = filterTASK5()
   nx = 4;   % Assuming that you use q as state variable.
   % Add your filter settings here.
   Rm =diag([0.0885,0.1117,0.1085]) ;
-  m0 =[0;sqrt((-4.9435)^2+(-35.2368)^2);(168.4627)];
-  g0=[-0.0974,0.3073,9.8683]';
+  m0 =[0;sqrt((4.0669)^2+(-6.8125)^2);(-43.2251)];
+  g0=[-0.1124,-0.0614,9.8704]';
   Ra=1.0e-03*diag([0.1894,0.1394,0.2128]);
   Rw=diag([1.0e-04*0.0024,1.0e-04 *0.0028,1.0e-04 *0.1949]);
  
