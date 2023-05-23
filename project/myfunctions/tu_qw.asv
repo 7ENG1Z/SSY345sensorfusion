@@ -6,9 +6,9 @@ function [x, P] = tu_qw(x, P, omega, T, Rw)
     % Rw the process noise covariance matrix.
     % Calculate  F G Q
         F = eye(size(x,1))+(T/2)*Somega(omega);
-        G = (T/2)*Sq(x);% process noise also has a motion model
+        G = (T/2)*Sq(x);
         Q=G*Rw*G';
-        x = F*x;%process noise is zero mean
+        x = F*x;
         P = F*P*F' + Q;
     
 end
